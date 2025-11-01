@@ -1,0 +1,41 @@
+## 前端fronted
+
+视频通话时需，一方先启动服务器 npm run serve
+
+运行前端 npm run dev
+
+前端src/views文件夹中
+Contact.vue —— 视频通话页面
+Home.vue —— 主页面
+Learn.vue —— 手语学习页面
+
+前端src/componects文件夹中与视频通话相关的：
+1.RTCVideo.vue
+   视频通话的核心组件，管理本地与远程视频流的显示。
+   包含 Video 组件（视频流展示）、RTCDataChannel（消息区域）、控制栏（音频/视频/消息/离开按钮）。
+   处理音视频设备的初始化与状态切换。
+
+2.Video.vue
+   基础视频组件，用于渲染本地或远程视频流。
+   通过 ref 暴露方法（如 setSrc）动态设置视频源。
+
+3.TrackToggle.vue
+  可复用的功能按钮组件，支持切换麦克风、摄像头、消息、离开等状态。
+  根据状态显示不同图标（如启用/禁用麦克风）。
+
+3.RTCDataChannel.vue
+  右侧消息区域（聊天框）组件，包含消息输入框和显示框。
+
+
+## 后端
+
+运行python manage.py runserver
+
+userauth包——实现登录注册
+words包——实现手语学习部分
+
+自己电脑部署运行时，需在signtalk文件中settings.py文件中修改下MySQL数据库的配置
+
+数据库文件导入后，记得迁移一下
+
+
