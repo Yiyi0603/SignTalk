@@ -1,0 +1,25 @@
+# Python 相关
+.venv/
+venv/
+env/
+*.pyc
+__pycache__/
+*.pyd
+*.dll
+*.lib
+
+# 日志/缓存
+*.log
+.cache/
+tmp/
+
+# 构建/依赖
+dist/
+build/
+node_modules/
+requirements.txt.lock
+
+# 系统文件
+.DS_Store
+Thumbs.db
+Thumbs.db

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="fronted">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/signtalk/fronted.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
