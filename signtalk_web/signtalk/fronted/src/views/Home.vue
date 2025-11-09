@@ -125,6 +125,7 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import NavBar from '../components/navbar.vue';
+import { getApiUrl, API_CONFIG } from '../config/api.js';
 
 const logoSrc = new URL('../assets/logo.png', import.meta.url).href;
 const isLogin = ref(true); // 控制当前是登录还是注册模式
@@ -146,7 +147,7 @@ const handleSubmit = () => {
     return;
   }
 
-  const apiUrl = isLogin.value ? 'http://127.0.0.1:8000/api/login/' : 'http://127.0.0.1:8000/api/register/';
+  const apiUrl = isLogin.value ? getApiUrl(API_CONFIG.ENDPOINTS.LOGIN) : getApiUrl(API_CONFIG.ENDPOINTS.REGISTER);
   const dataToSend = {
     username: formData.value.username,
     password: formData.value.password,

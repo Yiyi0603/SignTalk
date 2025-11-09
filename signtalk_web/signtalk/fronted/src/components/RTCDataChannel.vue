@@ -5,6 +5,11 @@
       disabled
       class="data-channel__output"
     />
+    <!-- 手语识别结果显示区域 -->
+    <div v-if="signLanguageResult" class="sign-recognition-display">
+      <div class="sign-recognition-title">🤟 手语识别结果</div>
+      <div class="sign-recognition-text">{{ signLanguageResult }}</div>
+    </div>
     <div class="input-wrapper">
       <a-textarea
         v-model="inputMessage"
@@ -24,11 +29,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { yiyu } from "https://avatar.gbqr.net/avatar.js";
+
+// 接收手语识别结果
+const props = defineProps({
+  signLanguageResult: {
+    type: String,
+    default: ''
+  }
+});
 
 const inputMessage = ref('');
 const outputMessages = ref('');
+
+// 监听手语识别结果变化
+watch(() => props.signLanguageResult, (newResult) => {
+  if (newResult) {
+    outputMessages.value += `[手语识别] ${newResult}\n`;
+  }
+});
 
 
 
@@ -93,5 +113,27 @@ const sendSignMessage = async () => {
 
 .data-channel__button:hover {
   background-color: #6CA6CD;
+}
+
+/* 手语识别显示样式 */
+.sign-recognition-display {
+  background-color: #e8f5e8;
+  border: 2px solid #4CAF50;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.sign-recognition-title {
+  font-weight: bold;
+  color: #2E7D32;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.sign-recognition-text {
+  color: #1B5E20;
+  font-size: 16px;
+  font-weight: bold;
 }
 </style>

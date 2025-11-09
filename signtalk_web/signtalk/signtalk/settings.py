@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-=csbo3ln+wrae+r(1e*bli%b-!@#p7s+vk4u6fy+a(#i$j(o)c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.189.244', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -42,7 +42,12 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'words',
+    'signrecognition',
 ]
+
+# TensorFlow配置
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'  # 减少TensorFlow日志输出
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,10 +60,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # CORS 中间件
     'django.middleware.common.CommonMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = [
-    "https://localhost:5173",  # 前端运行的地址
-    "https://127.0.0.1:5173",
-]
+# 允许所有来源（开发环境）
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'signtalk.urls'
 
@@ -86,12 +89,8 @@ WSGI_APPLICATION = 'signtalk.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sign',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR.parent / 'db.sqlite3',
     }
 }
 

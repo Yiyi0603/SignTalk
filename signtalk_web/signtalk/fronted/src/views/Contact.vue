@@ -20,9 +20,19 @@ let userInfo = {}
 let socket
 
 const showRTCVideo = ref(false)
+const toHalfWidthLower = (str) => {
+  const s = String(str || '').trim()
+    .replace(/[\u3000]/g, ' ')
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, (ch) => String.fromCharCode(ch.charCodeAt(0) - 0xFEE0))
+  return s.toLowerCase()
+}
+
 const handleJoin = (user) => {
   showRTCVideo.value = true
-  userInfo = user
+  userInfo = {
+    username: toHalfWidthLower(user.username),
+    room: toHalfWidthLower(user.room),
+  }
 }
 // 等待本地视频初始化完成后发送信令服务
 const streamSuccess = ({ stream, remoteVideoRef }) => {

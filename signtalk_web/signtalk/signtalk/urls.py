@@ -1,6 +1,6 @@
 # urls.py
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from userauth.views import register, login
 from words.views import CategoryList, WordList,WordDetail
 
@@ -10,5 +10,6 @@ urlpatterns = [
     path('api/login/', login, name='login'),
     path('api/v1/categories/', CategoryList.as_view()),  # 直接使用 path 注册
     path('api/v1/words/', WordList.as_view()),
-path('api/v1/words/<int:pk>/', WordDetail.as_view()),  # 新增单个词汇详情端点
+    path('api/v1/words/<int:pk>/', WordDetail.as_view()),  # 新增单个词汇详情端点
+    path('api/sign/', include('signrecognition.urls')),  # 手语识别API
 ]

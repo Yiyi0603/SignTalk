@@ -24,5 +24,13 @@ export default defineConfig({
     },
     host: '0.0.0.0',
     port: 5173,
+    proxy: {
+      // 将以 /api 开头的请求代理到本地 HTTP Django 后端，避免浏览器混用协议
+      '/api': {
+        target: 'http://127.0.0.1:8000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 })

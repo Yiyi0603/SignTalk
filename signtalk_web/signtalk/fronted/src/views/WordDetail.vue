@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { getApiUrl, API_CONFIG } from '../config/api.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -13,7 +14,7 @@ const loading = ref(true)
 onMounted(async () => {
   const wordId = parseInt(route.params.id)
   try {
-    const response = await fetch(`http://localhost:8000/api/v1/words/${wordId}/`)
+    const response = await fetch(`${getApiUrl(API_CONFIG.ENDPOINTS.WORD_DETAIL)}${wordId}/`)
     const data = await response.json()
     word.value = data
   } catch (error) {

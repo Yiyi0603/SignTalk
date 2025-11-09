@@ -39,6 +39,7 @@ import { ref, onMounted } from 'vue'
 import NavBar from '../components/navbar.vue'
 import CategoryList from '../components/CategoryList.vue'
 import SearchBar from '../components/SearchBar.vue'
+import { getApiUrl, API_CONFIG } from '../config/api.js'
 
 // 原Learn.vue数据
 const logoSrc = new URL('../assets/logo.png', import.meta.url).href;
@@ -51,7 +52,7 @@ const searchQuery = ref('')
 // Learn.vue 中检查 API 地址是否以斜杠结尾
 const fetchCategories = async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/categories/');  // 去掉 ?format=json
+    const response = await fetch(getApiUrl(API_CONFIG.ENDPOINTS.CATEGORIES));  // 去掉 ?format=json
     const data = await response.json();
     categories.value = data;
   } catch (error) {

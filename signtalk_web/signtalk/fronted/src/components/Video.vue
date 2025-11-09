@@ -1,7 +1,10 @@
 <template>
   <video
-    class="video"
-    ref="VideoRef"
+  class="video"
+  ref="VideoRef"
+  :muted="muted"
+  autoplay
+  playsinline
   >
     <source type="video/mp4" />
   </video>
@@ -10,6 +13,9 @@
 import { ref } from "vue";
 
 const VideoRef = ref();
+const props = defineProps({
+  muted: { type: Boolean, default: false }
+});
 const setSrc = (src) => {
   VideoRef.value.srcObject = src;
 };
